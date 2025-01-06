@@ -2855,8 +2855,10 @@ input, select, textarea {
 
 				#header .logo .symbol img {
 					display: block;
-					width: 4em;
-					height: 4em;
+					width: auto;
+    					height: auto;
+    					max-width: 100%; /* Ensure it doesn't exceed container */
+    					max-height: 100%;
 				}
 
 		#header nav {
