@@ -182,4 +182,30 @@
 
 			});
 
+
+		$gallery
+			// Dynamically load images for the gallery
+			document.addEventListener('DOMContentLoaded', () => {
+    			const galleryContainer = document.getElementById('gallery');
+
+    			fetch('./images/gallery/')
+        			.then(response => response.text())
+        			.then(html => {
+            			const parser = new DOMParser();
+            			const doc = parser.parseFromString(html, 'text/html');
+            			const links = [...doc.querySelectorAll('a')];
+
+            			links.forEach(link => {
+                			const href = link.getAttribute('href');
+                			if (href.match(/\.(jpg|jpeg|png|gif)$/i)) {
+                    			const img = document.createElement('img');
+                    			img.src = `images/gallery/${href}`;
+                    			img.alt = 'Gallery Image';
+                    			galleryContainer.appendChild(img);
+                			}
+            			});
+        			})
+        			.catch(error => console.error('Error loading gallery:', error));
+			});
+
 })(jQuery);
